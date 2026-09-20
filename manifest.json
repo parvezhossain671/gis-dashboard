@@ -1,9 +1,0 @@
-{
-  "name":"Barishal Palli Bidyut Samity-1 GIS Location Finder",
-  "short_name":"GIS Finder",
-  "start_url":"./",
-  "display":"standalone",
-  "background_color":"#eef4fb",
-  "theme_color":"#0b3b78",
-  "icons":[]
-}
