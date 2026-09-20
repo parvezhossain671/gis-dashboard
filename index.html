@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b3b78">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<title>Barishal Palli Bidyut Samity-1 | GIS Location Finder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <img class="org-logo" src="logo.png" alt="Barishal Palli Bidyut Samity-1">
+      <div class="brand-copy">
+        <div class="brand-title">GIS Location Finder</div>
+        <div class="brand-sub">Consumer Location &amp; GIS Dashboard</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="online"><i></i> System Online</span>
+      <button class="theme-mini" id="themeToggleTop" title="Light / Dark">☼</button>
+      <button class="settings-top" id="settingsBtn" title="Settings">⚙ <span>Settings</span>⌄</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <button class="side-item active" id="homeNav"><span class="ico">⌂</span><span>Dashboard</span></button>
+      <button class="side-item" id="findNav"><span class="ico">⌖</span><span>Find Location</span></button>
+      <button class="side-item" id="historyNav"><span class="ico">◴</span><span>Search History</span></button>
+      <button class="side-item" id="helpNav"><span class="ico">?</span><span>Help &amp; Support</span></button>
+      <div class="sidebar-foot">Reliable Electricity<br>for a Brighter Future</div>
+    </aside>
+
+    <main class="main-content">
+      <div class="dashboard-grid">
+        <section class="search-card card">
+          <div class="card-head">
+            <div>
+              <div class="eyebrow">LOCATION SEARCH</div>
+              <h1>Consumer Location Finder</h1>
+              <p>Find consumer location using Book No and Account No</p>
+            </div>
+            <div class="location-badge">⌖</div>
+          </div>
+          <div class="search-row">
+            <div class="field">
+              <label for="book">Book No</label>
+              <div class="select-wrap"><span>▣</span><select id="book"><option value="">Loading…</option></select></div>
+            </div>
+            <div class="field">
+              <label for="account">Account No</label>
+              <div class="select-wrap"><span>♙</span><select id="account" disabled><option>Select Book No first</option></select></div>
+            </div>
+            <button class="primary-btn search-btn" id="search"><span>⌕</span> Search Location</button>
+          </div>
+          <div class="quick-line"><strong>Quick Search:</strong><div id="quickSearches" class="chips"><span class="chip muted">No recent searches</span></div></div>
+          <div id="status" class="status" aria-live="polite"></div>
+        </section>
+
+        <aside class="stats-card card">
+          <div class="section-title"><span>▥</span> Quick Statistics</div>
+          <div class="stats-grid">
+            <div class="stat blue"><span>▣</span><small>Total Book No</small><b id="publicBookCount">—</b></div>
+            <div class="stat green"><span>♙</span><small>Total Consumers</small><b id="publicLocationCount">—</b></div>
+            <div class="stat purple"><span>⌖</span><small>Locations Found</small><b id="foundCount">0</b></div>
+            <div class="stat orange"><span>☁</span><small>KML Files</small><b id="kmlCount">—</b></div>
+          </div>
+        </aside>
+
+        <section class="success-card" id="resultCard" hidden>
+          <div class="success-icon">✓</div>
+          <div><strong>Location Found Successfully!</strong><p id="resultText">—</p></div>
+          <button class="map-btn" id="mapBtn">📍 Open in Google Maps ↗</button>
+        </section>
+
+        <section class="details-card card" id="detailsCard" hidden>
+          <div class="section-title"><span>⌖</span> Consumer Details</div>
+          <div class="details-list">
+            <div><span>Book No</span><b id="detailBook">—</b></div>
+            <div><span>Account No</span><b id="detailAccount">—</b></div>
+            <div><span>Latitude</span><b id="detailLat">—</b></div>
+            <div><span>Longitude</span><b id="detailLon">—</b></div>
+          </div>
+          <button class="map-btn full" id="mapBtn2">📍 Open in Google Maps ↗</button>
+          <button class="copy-btn" id="copyBtn">▣ Copy Coordinates</button>
+        </section>
+
+        <section class="map-card card" id="mapCard">
+          <div class="map-placeholder">
+            <div class="map-top"><span class="map-tab active">Map</span><span class="map-tab">Satellite</span><button id="fullMapBtn">⛶</button></div>
+            <div class="map-art">
+              <div class="road r1"></div><div class="road r2"></div><div class="road r3"></div><div class="road r4"></div>
+              <div class="field f1"></div><div class="field f2"></div><div class="field f3"></div><div class="field f4"></div>
+              <div class="map-empty" id="mapEmpty"><span>⌖</span><b>Search a consumer to view location</b><small>Latitude &amp; longitude will appear here</small></div>
+              <div class="pin" id="mapPin" hidden>●</div>
+              <div class="map-label" id="mapLabel" hidden>Book — · Acc —</div>
+            </div>
+            <div class="map-coords" id="mapCoords">No location selected</div>
+          </div>
+        </section>
+
+        <section class="history-card card">
+          <div class="section-title"><span>◷</span> Recent Searches <button id="clearHistory">Clear</button></div>
+          <div id="historyList" class="history-list"><div class="empty-history">No searches yet</div></div>
+        </section>
+      </div>
+
+      <footer class="footer">© <span id="year"></span> <b>Barishal Palli Bidyut Samity-1</b> &nbsp;|&nbsp; GIS Location Finder <span>Developed for Better Service ♥</span></footer>
+    </main>
+  </div>
+</div>
+
+<nav class="mobile-nav"><button class="active" id="mHome">⌂<small>Dashboard</small></button><button id="mFind">⌖<small>Find</small></button><button id="mHistory">◴<small>History</small></button><button id="mSettings">⚙<small>Settings</small></button></nav>
+
+<div class="overlay" id="settingsPanel" hidden>
+  <div class="sheet">
+    <div class="sheet-head"><div><div class="eyebrow">SETTINGS</div><h2>Dashboard Settings</h2></div><button class="close-btn" id="closeSettings">×</button></div>
+    <div class="setting-row"><div><strong>Dark mode</strong><small>Use a dark interface</small></div><button class="switch" id="themeToggle" aria-label="Toggle dark mode"><span></span></button></div>
+    <div class="divider"></div>
+    <div class="admin-section">
+      <div class="admin-title">🛡 Admin Area</div><p>Upload, replace or delete KML files. Admin authentication is required.</p>
+      <div id="loginBox"><input id="email" type="email" placeholder="Admin email" autocomplete="username"><input id="pass" type="password" placeholder="Password" autocomplete="current-password"><button class="primary-btn full" id="loginBtn">ADMIN LOGIN</button><div id="upstatus" class="status"></div></div>
+      <div id="adminBox" hidden>
+        <div class="admin-welcome" id="who"></div>
+        <div class="admin-stats"><div><b id="bookCount">—</b><small>Books</small></div><div><b id="locationCount">—</b><small>Locations</small></div></div>
+        <label class="file-label">KML file<input id="file" type="file" accept=".kml,.xml"></label>
+        <button class="primary-btn full" id="upload">UPLOAD / REPLACE KML</button><div id="adminStatus" class="status"></div>
+        <div class="divider"></div>
+        <label for="deleteBook">Delete Book No</label><select id="deleteBook"><option value="">Select Book No</option></select>
+        <button class="danger-btn full" id="deleteBtn">DELETE SELECTED BOOK</button><div id="deleteStatus" class="status"></div>
+        <button class="secondary-btn full" id="logout">LOGOUT</button>
+      </div>
+    </div>
+    <div class="about"><b>Barishal Palli Bidyut Samity-1</b><br>GIS Location Finder • Mobile &amp; Web</div>
+  </div>
+</div>
+<div class="toast" id="toast" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
